@@ -25,6 +25,7 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 
+ 
 
 render() {
     const { user } = this.props.auth;
@@ -35,9 +36,9 @@ return (
 
   <Sider className="side" collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
        <div  style={{ height:"30%", backgroundColor:"#002140" }} className="logo" >
-            <img src="logoindex.svg" style={{width:"50%" , marginTop:"12%"}} />
+            <img alt="logo" src="logoindex.svg" style={{width:"50%" , marginTop:"12%"}} />
             <br></br>
-            <img src="logo.png" style={{width:"60%" , marginTop:"12%"}} />
+            <img alt="logo"  src="logo.png" style={{width:"60%" , marginTop:"12%"}} />
        </div>
        <Menu style={{paddingTop:"15%"}} theme="dark" defaultSelectedKeys={['1']} mode="inline">
          <Menu.Item key="1" icon={<PieChartOutlined />}>

@@ -2,6 +2,9 @@ import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+
+
 
 const Signin = (props) => {
 
@@ -42,7 +45,8 @@ const [state,setState] = useState(
 
 
 
-    const { errors } = props
+    const { errors ,loading} = props
+   
 return(
       <div className="container">
 
@@ -55,12 +59,13 @@ return(
             </Link>
             </div>
             <div>
-              <img src="logo.png" style={{width:"45%"}} />
+              <img alt="logo" src="logo.png" style={{width:"45%"}} />
             </div>
             <div className="col s12" style={{ paddingLeft: "11.250px" , marginBottom:"5%"}}>
               <h1>
                 <b>Sign In</b> 
               </h1>
+              {(loading)?(<div>Please Wait... <Spin /></div>):("")}
             </div>      
       </div>
 

@@ -17,7 +17,7 @@ export const setCurrentUser = decoded => {
 export const setErrors = error => {
   return {
     type: GET_ERRORS,
-    payload: error.response.data
+    payload: (error && error.response)? error.response.data : error
   }
 };
 export const setUserLoading = (flag) => {
@@ -29,12 +29,17 @@ export const setUserLoading = (flag) => {
 
 
 export const registerUser = (userData, history) => dispatch => {
-
+  dispatch(setUserLoading(true));
   axios
     .post("http://localhost:5000/users/signup", userData)
-    .then(res => history.push("/login")) 
-    .catch(err =>
-     dispatch(setErrors(err))
+    .then(res =>{
+      dispatch(setUserLoading(false));
+      history.push("/login")
+    }) 
+    .catch(err =>{
+      dispatch(setErrors(err))
+      dispatch(setUserLoading(false));
+    }
     );
 };
 
@@ -50,9 +55,10 @@ export const loginUser = userData => dispatch => {
       const decoded = jwt_decode(token);
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
+    .catch(err =>{
+      dispatch(setUserLoading(false));
       dispatch(setErrors(err))
-      
+    }
     );
 };
 
