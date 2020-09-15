@@ -1,63 +1,75 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import jwt_decode from "jwt-decode";
 import {
   GET_ERRORS,
-  SET_USER,
   LOADING
 } from "./actiontypes";
 
+const instance = axios.create({
+  baseURL: 'http://localhost:5000/',
+  timeout: 3000
+});
 
-export const setCurrentUser = decoded => {
-  return {
-    type: SET_USER,
-    payload: decoded
-  };
-};
 export const setErrors = error => {
   return {
     type: GET_ERRORS,
-    payload: error.response.data
+    payload: (error && error.response) ? error.response.data : error
   }
 };
 export const setUserLoading = (flag) => {
   return {
     type: LOADING,
-    loading : flag
+    loading: flag
   };
 };
 
-
 export const registerUser = (userData, history) => dispatch => {
-
-  axios
-    .post("http://localhost:5000/users/signup", userData)
-    .then(res => history.push("/login")) 
-    .catch(err =>
-     dispatch(setErrors(err))
+  dispatch(setUserLoading(true));
+  instance
+    .post("users/signup", userData)
+    .then(res => {
+      dispatch(setUserLoading(false));
+      history.push("/login")
+    })
+    .catch(err => {
+      dispatch(setUserLoading(false));
+      if (err && !(err.response)) {
+        var error = new Error("Something Went Wrong.Check your Internet connection");
+        dispatch(setErrors(error))
+      }
+      else {
+        dispatch(setErrors(err))
+      }
+    }
     );
 };
 
 export const loginUser = userData => dispatch => {
   dispatch(setUserLoading(true));
-  axios
-    .post("http://localhost:5000/users/signin", userData)
+  instance
+    .post("users/signin", userData)
     .then(res => {
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       dispatch(setUserLoading(false));
       setAuthToken(token);
-      const decoded = jwt_decode(token);
-      dispatch(setCurrentUser(decoded));
+
     })
-    .catch(err =>
-      dispatch(setErrors(err))
-      
+    .catch(err => {
+      dispatch(setUserLoading(false));
+      if (err && !(err.response)) {
+        var error = new Error("Something Went Wrong.Check your Internet connection");
+        dispatch(setErrors(error))
+      }
+      else {
+        dispatch(setErrors(err))
+      }
+    }
     );
 };
 
-export const logoutUser = () => dispatch => {
+export const logoutUser = (history) => dispatch => {
   localStorage.removeItem("jwtToken");
   setAuthToken(false);
-  dispatch(setCurrentUser({}));
+  history.push("/login")
 };
