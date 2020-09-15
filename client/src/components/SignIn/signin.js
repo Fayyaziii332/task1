@@ -25,20 +25,15 @@ const [state,setState] = useState(
     }
 
     const onSubmit = e => {
-        // e.preventDefault();
-        
          const userData = {
           email: state.email,
           password: state.password
         };
-        console.log(userData)
-        // console.log(props)
         props.loginUser(userData); 
       };
 
     useEffect(() => {
-        if (props && props.auth && props.auth.isAuthenticated) {
-           console.log(99)
+        if (localStorage.jwtToken) {
             props.history.push("/dashboard");
           }
     })
@@ -66,6 +61,9 @@ return(
                 <b>Sign In</b> 
               </h1>
               {(loading)?(<div>Please Wait... <Spin /></div>):("")}
+              <span className="red-text">
+                      {(errors)? errors.message :''}
+              </span>
             </div>      
       </div>
 
@@ -108,7 +106,7 @@ return(
             {(errors) ? errors.password : ""}
             {(errors) ? errors.passwordincorrect:""}
       </span>
-
+      
       <Form.Item style={{textAlign:"left"}}>
         <Button id="btn-s" type="primary" htmlType="submit" className="login-form-button">
           Sign in

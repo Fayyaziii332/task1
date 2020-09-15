@@ -1,20 +1,15 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
-const PrivateRoute = ({ component: Component, auth, ...rest }) => (
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
-      auth.isAuthenticated === true ? (
+    render={(props) =>
+      (localStorage.jwtToken) ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/login" />
-      )
-    }
+          <Redirect to="/login" />
+        )}
   />
 );
-PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
-export default PrivateRoute
+export default PrivateRoute;
