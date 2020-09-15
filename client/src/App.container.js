@@ -4,9 +4,7 @@ import { logoutUser } from "./actions/authActions";
 import store from "./store/store";
 import App from "./App"
 
-
 if (localStorage.jwtToken) {
-
   const token = localStorage.jwtToken;
   setAuthToken(token);
   const decoded = jwt_decode(token);
@@ -15,7 +13,6 @@ if (localStorage.jwtToken) {
     store.dispatch(logoutUser());
     window.location.href = "./login";
   }
-  
 }
 
 export default App;

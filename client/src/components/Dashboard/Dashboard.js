@@ -5,21 +5,15 @@ import { DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
 const { Header, Content, Footer, Sider } = Layout;
 
 class Dashboard extends Component {
-
   state = {
-
     collapsed: false,
-
   };
 
   onCollapse = collapsed => {
-
     this.setState({ collapsed });
-
   };
 
   onLogoutClick = e => {
-
     e.preventDefault();
     this.props.logoutUser(this.props.history); 
   };
@@ -27,7 +21,6 @@ class Dashboard extends Component {
   render() {
 
     return (
-
       <Layout style={{ minHeight: '100vh' }}>
         <Sider className="side" collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div style={{ height: "30%", backgroundColor: "#002140" }} className="logo" >
@@ -71,15 +64,11 @@ class Dashboard extends Component {
         </Layout>
       </Layout>
     );
-
   }
-
 }
 
 Dashboard.propTypes = {
-
   logoutUser: PropTypes.func.isRequired,
-
 };
 
 export default Dashboard

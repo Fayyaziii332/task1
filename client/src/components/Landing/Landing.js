@@ -6,11 +6,9 @@ const { Title } = Typography;
 class Landing extends Component {
 
   componentDidMount() {
-
     if (localStorage.jwtToken) {
       this.props.history.push("/dashboard");
     }
-
   }
 
   render() {
@@ -23,7 +21,6 @@ class Landing extends Component {
           <Title style={{ padding: "20px", marginBottom: "20px", color: "grey" }} level={4}>Let's Start</Title>
 
           <Link
-
             to="/register"
             style={{
               width: "140px",
@@ -38,7 +35,6 @@ class Landing extends Component {
           >
             Sign Up
               </Link>
-
           <Link
             to="/login"
             style={{
@@ -55,16 +51,9 @@ class Landing extends Component {
           >
             Sign In
               </Link>
-
-
-
         </div>
-
       </div>
-
     );
-
   }
-
 }
 export default Landing;

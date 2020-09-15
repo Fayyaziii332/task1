@@ -6,18 +6,14 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 
 class Signup extends Component {
   constructor() {
-
     super();
     this.state = {
-
       name: '',
       email: '',
       password: '',
       password2: '',
       errors: {},
-
     };
-
   }
 
   handleChange = (e) => {
@@ -36,19 +32,13 @@ class Signup extends Component {
     }
   }
 
-
-
   onSubmit = (e) => {
-
     const newUser = {
-
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
-
     };
-
     this.props.registerUser(newUser, this.props.history);
   };
 
@@ -57,8 +47,6 @@ class Signup extends Component {
     const { loading } = this.props;
     return (
       <div className="container">
-
-
         <div style={{ marginTop: "15%" }} className="col s8 offset-s2">
           <div className="" style={{ paddingLeft: "11.250px", textAlign: "left" }}>
             <Link to="/" style={{ display: "block", marginLeft: "24%" }} className="waves-effect">
@@ -76,10 +64,7 @@ class Signup extends Component {
             </h1>
           </div>
         </div>
-
-
         <Form
-
           className="login-form"
           initialValues={{ remember: true }}
           onFinish={this.onSubmit}
@@ -98,8 +83,6 @@ class Signup extends Component {
           <span className="red-text">
             {(errors) ? errors.name : ""}
           </span>
-
-
           <Form.Item
             name="email"
             rules={[{ required: true, message: 'Please input your Username!' }]}
@@ -160,10 +143,8 @@ class Signup extends Component {
     );
   }
 }
-
 Signup.propTypes = {
   registerUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
-
 export default Signup

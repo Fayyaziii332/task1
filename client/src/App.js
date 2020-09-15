@@ -7,13 +7,11 @@ import PrivateRoute from './components/private-route/PrivateRoute';
 import Dashboard from './components/Dashboard/Dashboard.container';
 import './App.css';
 
-
 class App extends React.Component {
 
   render() {
 
     return (
-
       <Router>
         <div className="App">
           <Route exact path="/" component={Landing} />
@@ -24,11 +22,8 @@ class App extends React.Component {
           </Switch>
         </div>
       </Router>
-      
     );
-
   }
-
 }
 
 export default App;

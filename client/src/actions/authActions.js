@@ -4,16 +4,11 @@ import {
   GET_ERRORS,
   LOADING
 } from "./actiontypes";
-// import { response } from "express";
-
-
 
 const instance = axios.create({
   baseURL: 'http://localhost:5000/',
   timeout: 3000
-
 });
-
 
 export const setErrors = error => {
   return {
@@ -28,7 +23,6 @@ export const setUserLoading = (flag) => {
   };
 };
 
-
 export const registerUser = (userData, history) => dispatch => {
   dispatch(setUserLoading(true));
   instance
@@ -38,7 +32,6 @@ export const registerUser = (userData, history) => dispatch => {
       history.push("/login")
     })
     .catch(err => {
-
       dispatch(setUserLoading(false));
       if (err && !(err.response)) {
         var error = new Error("Something Went Wrong.Check your Internet connection");
@@ -47,14 +40,11 @@ export const registerUser = (userData, history) => dispatch => {
       else {
         dispatch(setErrors(err))
       }
-
     }
     );
 };
 
 export const loginUser = userData => dispatch => {
-
-
   dispatch(setUserLoading(true));
   instance
     .post("users/signin", userData)
