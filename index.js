@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routes/users");
+const emp = require("./routes/emp");
 
 const app = express();
 
@@ -20,6 +21,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/users", users);
+app.use("/emp", emp);
 
 // DB Configuration
 const db = require("./config/constants").mongoURI;

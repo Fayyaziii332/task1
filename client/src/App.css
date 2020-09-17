@@ -59,6 +59,31 @@ body{
 .red-text{
   color:red;
 }
+.green-text{
+  color: green;
+}
+.ant-form .ant-form-horizontal{
+  text-align: left !important;
+}
+.ant-col .ant-form-item-label .ant-col-xs-16 .ant-col-sm-8{
+  text-align: left !important;
+}
+
+.ant-form-horizontal .ant-form-item-label {
+  padding-left: 35px;
+  text-align: left;
+}
+#main{
+  margin-top: 30px !important;
+  text-align: left;
+}
+#heading2{
+  margin-bottom: 30px;
+}
+#registerbtn{
+  width: 140px !important;
+  height: 40px !important;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

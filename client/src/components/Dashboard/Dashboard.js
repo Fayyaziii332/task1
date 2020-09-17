@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { Link, Switch } from "react-router-dom";
+import PrivateRoute from '../private-route/PrivateRoute';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Layout, Menu, Button } from 'antd';
 import { DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
-const { Header, Content, Footer, Sider } = Layout;
+import EmployeeForm from '../Form/form.container';
+import EmployeeTable from '../Table/table.container';
 
+const { Header, Content, Footer, Sider } = Layout;
 class Dashboard extends Component {
   state = {
     collapsed: false,
@@ -15,11 +20,10 @@ class Dashboard extends Component {
 
   onLogoutClick = e => {
     e.preventDefault();
-    this.props.logoutUser(this.props.history); 
+    this.props.logoutUser(this.props.history);
   };
 
   render() {
-
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider className="side" collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
@@ -30,11 +34,11 @@ class Dashboard extends Component {
           </div>
           <Menu style={{ paddingTop: "15%" }} theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
-              Dashboard
-         </Menu.Item>
+              <Link to="/form" >Add Employee</Link>
+            </Menu.Item>
             <Menu.Item key="2" style={{ marginTop: "12%" }} icon={<DesktopOutlined />}>
-              List
-         </Menu.Item>
+              <Link to="/table">List</Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
@@ -56,19 +60,20 @@ class Dashboard extends Component {
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <div className="site-layout-background" style={{ padding: 24, marginTop: "20px", minHeight: 600 }}>
-              Logged in Now
-       </div>
+              <Switch>
+                <PrivateRoute path='/table' component={EmployeeTable} />
+                <PrivateRoute exact path='/form' component={EmployeeForm} />
+                <PrivateRoute render={() => <h3 style={{ color: "red", margin: "25px" }}>No Such Component Exists</h3>} />
+              </Switch>
+            </div>
           </Content>
-
           <Footer style={{ textAlign: 'center' }}>MERN TASK Developed By @wan </Footer>
         </Layout>
       </Layout>
     );
   }
 }
-
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
 };
-
-export default Dashboard
+export default withRouter(Dashboard);
