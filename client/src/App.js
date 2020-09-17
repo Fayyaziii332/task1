@@ -7,23 +7,15 @@ import PrivateRoute from './components/private-route/PrivateRoute';
 import Dashboard from './components/Dashboard/Dashboard.container';
 import './App.css';
 
-class App extends React.Component {
-
-  render() {
-
-    return (
-      <Router>
-        <div className="App">
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Signup} />
-          <Route exact path="/login" component={Signin} />
-          <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
+const App = () => {
+  return (
+    <Router>
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/register" component={Signup} />
+      <Route exact path="/login" component={Signin} />
+      <PrivateRoute path="/table" component={Dashboard} />
+      <PrivateRoute path="/form" component={Dashboard} />
+    </Router>
+  );
 }
-
 export default App;
